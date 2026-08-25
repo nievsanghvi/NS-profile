@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Viewfinder</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.0/lucide.min.js"></script>
+<style>
+body, html {
+margin: 0;
+padding: 0;
+height: 100%;
+background-color: #1a1a1a;
+font-family: 'Courier New', Courier, monospace;
+overflow: hidden;
+color: #ffffff;
+}
+
+/* Camera Viewfinder Overlay */
+.viewfinder {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 100;
+border: 20px solid #000;
+box-sizing: border-box;
+}
+
+.corner {
+position: absolute;
+width: 40px;
+height: 40px;
+border: 2px solid rgba(255, 255, 255, 0.8);
+pointer-events: none;
+}
+.top-left { top: 40px; left: 40px; border-right: 0; border-bottom: 0; }
+.top-right { top: 40px; right: 40px; border-left: 0; border-bottom: 0; }
+.bottom-left { bottom: 40px; left: 40px; border-right: 0; border-top: 0; }
+.bottom-right { bottom: 40px; right: 40px; border-left: 0; border-top: 0; }
+
+.rec-dot {
+position: absolute;
+top: 60px;
+right: 60px;
+width: 15px;
+height: 15px;
+background-color: #ff0000;
+border-radius: 50%;
+animation: blink 1s infinite;
+}
+
+@keyframes blink {
+0%, 100% { opacity: 1; }
+50% { opacity: 0; }
+}
+
+/* Grid Layout */
+.dashboard {
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-rows: 1fr 1fr 1fr;
+height: 100vh;
+gap: 10px;
+padding: 60px;
+box-sizing: border-box;
+}
+
+.cell {
+background: #262626;
+border: 1px solid #444;
+position: relative;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+}
+
+/* Top row spanning for CV and Timetable */
+.cv-cell { grid-row: span 2; }
+.timetable-cell { grid-row: span 2; }
+
+.cell-header {
+background: #333;
+padding: 8px 15px;
+font-size: 0.8rem;
+text-transform: uppercase;
+letter-spacing: 2px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.content-frame {
+flex-grow: 1;
+width: 100%;
+border: none;
+background: white;
+}
+
+.placeholder-content {
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+padding: 20px;
+color: #888;
+}
+
+.btn {
+margin-top: 10px;
+padding: 8px 16px;
+background: transparent;
+border: 1px solid #fff;
+color: #fff;
+cursor: pointer;
+text-decoration: none;
+font-size: 0.7rem;
+transition: 0.3s;
+}
+
+.btn:hover {
+background: #fff;
+color: #000;
+}
+
+.status-bar {
+position: absolute;
+bottom: 60px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+gap: 20px;
+font-size: 0.7rem;
+z-index: 101;
+}
+</style>
+</head>
+<body>
+
+<div class="viewfinder">
+<div class="corner top-left"></div>
+<div class="corner top-right"></div>
+<div class="corner bottom-left"></div>
+<div class="corner bottom-right"></div>
+<div class="rec-dot"></div>
+<div style="position: absolute; top: 60px; left: 60px; font-size: 0.8rem;">ISO 400</div>
+<div style="position: absolute; bottom: 60px; right: 60px; font-size: 0.8rem;">1/125 F5.6</div>
+</div>
+
+<main class="dashboard">
+<!-- Section 1: CV -->
+<section class="cell cv-cell">
+<div class="cell-header">
+<span>CV.PDF</span>
+<i data-lucide="file-text" size="14"></i>
+</div>
+<iframe src="cv.pdf" class="content-frame"></iframe>
+</section>
+
+<!-- Section 2: Timetable -->
+<section class="cell timetable-cell">
+<div class="cell-header">
+<span>WEEKLY TIMETABLE.HTML</span>
+<i data-lucide="calendar" size="14"></i>
+</div>
+<iframe src="timetable.html" class="content-frame"></iframe>
+</section>
+
+<!-- Section 3: High School Appreciation Letter -->
+<section class="cell">
+<div class="cell-header">
+<span>APPRECIATION LETTER.PDF</span>
+<i data-lucide="award" size="14"></i>
+</div>
+<div class="placeholder-content">
+<p>Academic Recognition</p>
+<a href="appreciation.pdf" target="_blank" class="btn">OPEN DOCUMENT</a>
+</div>
+</section>
+
+<!-- Section 4: Research Publication -->
+<section class="cell">
+<div class="cell-header">
+<span>Research Publicaion</span>
+<i data-lucide="box" size="14"></i>
+</div>
+<div class="placeholder-content">
+<p>Publication Certificate</p>
+<a href="artifact1.pdf" target="_blank" class="btn">VIEW CONTENT</a>
+</div>
+</section>
+</section>
+</main>
+<script>
+// Initialize Lucide icons
+lucide.createIcons();
+</script>
+</body>
+</html>
